@@ -1,0 +1,8 @@
+.bi {
+  color: black;
+}
+
+.bi:hover {
+  color: blue;
+  font-weight: bold;
+}

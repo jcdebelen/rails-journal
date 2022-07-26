@@ -1,0 +1,40 @@
+<header class="p-3 mb-3 border-bottom">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+      </a>
+
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li class="nav-item"><%= link_to "Home", root_path, class:"nav-link px-2 link-dark"%></li>
+        
+          <% if user_signed_in? %>
+          <li class="nav-item"><%= link_to "Journal", categories_path, class:"nav-link px-2 link-dark"%></li>
+          <li class="nav-item"><%= link_to "Tasks", tasks_path, class:"nav-link px-2 link-dark" %></li>
+          <li class="nav-item"><%= link_to "Add category",  new_category_path, class:"nav-link px-2 link-dark" %></li>
+          <% else %>
+          <li><a href="#" class="nav-link px-2 link-dark">Overview</a></li>
+          <% end %>
+      </ul>
+
+      <div class="text-end">
+
+        <% if user_signed_in? %>
+          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu text-small">
+               <li><%= link_to "Edit Profile", edit_user_registration_path, class:"dropdown-item" %></li>
+              <li><hr class="dropdown-divider"></li>
+               <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:"dropdown-item text-black" %></li>
+            </ul>
+                     
+        <% else %>
+          <button type="button" class="btn btn-outline-dark me-2"><%= link_to "Login", new_user_session_path, class:"nav-link" %></button>
+          <button type="button" class="btn btn-warning"><%= link_to "Sign Up", new_user_registration_path, class:"nav-link text-black" %></button>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</header>

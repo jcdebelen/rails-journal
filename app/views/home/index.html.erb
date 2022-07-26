@@ -1,0 +1,96 @@
+
+<% if user_signed_in?%>
+<div class="container">
+    <h1 class="display-6 text-center">Today</h1>
+    <div class="container d-flex justify-content-center flex-wrap">
+    <% @tasks.each do |task| %>
+        <% @categories.each do |category| %>
+            <% if task.category_id == category.id %>
+                <%if task.deadline.to_date == DateTime.current.to_date %>
+                    <div class="card bg-light mb-3 ms-4" style="width: 250px">
+                        <%= render task %>
+                    </div>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+    </div>
+
+
+
+    <h1 class="display-6 text-center">Overdue</h1>
+    <div class="container d-flex justify-content-center flex-wrap">
+    <% @tasks.each do |task| %>
+        <% @categories.each do |category| %>
+            <% if task.category_id == category.id %>
+                <%if task.deadline.to_date < DateTime.current.to_date %>
+                    <div class="card border-danger mb-3 ms-4 text-danger" style="width: 250px">
+                        <%= render task %>
+                    </div>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+    </div>
+
+
+    <h1 class="display-6 text-center">Upcoming</h1>
+    <div class="container d-flex justify-content-center flex-wrap">
+    <% @tasks.each do |task| %>
+        <% @categories.each do |category| %>
+            <% if task.category_id == category.id %>
+                <%if task.deadline.to_date > DateTime.current.to_date %>
+                    <div class="card border-light mb-3 ms-4" style="width: 250px">
+                        <%= render task %>
+                    </div>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+    </div>
+</div>
+<% else %>
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+     <div class="col-md-10 mx-auto col-lg-5">
+        <form class="p-4 p-md-5 border rounded-3 bg-light">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-floating mb-3">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", placeholder:"name@example.com", id:"floatingPassword"%>
+            <label for="floatingInput">Email address</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <%= f.password_field :password, autocomplete: "current-password", class:"form-control", placeholder:"Password" %>
+            <label for="floatingPassword">Password</label>
+          </div>
+
+          <div class="checkbox mb-3">
+            <% if devise_mapping.rememberable? %>
+            <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end %>
+          </div>
+       <%= f.submit "Log in", class:"w-100 btn btn-lg btn-primary actions mb-3" %>
+       <p class="text-center mt-2"><%= link_to "Forgot password?", new_user_password_path, method: :delete, class:"text-decoration-none" %></p>
+          <hr class="my-4">
+          <small class="text-muted">By clicking Login, you agree to the terms of use.</small>
+            <% end %>
+        </form>
+        
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold lh-1 mb-3">Happy Journal</h1>
+        <p class="lead">Join millions of users and create a healthier, happier mind. A sanctuary for your mind and soul, Journey will help increase your positive energy, be more grateful and a calmer mind by building healthy thinkings through journaling.</p>
+        <p class="lead">We’re more than just a journal, or a diary; we’re your own motivational coach and happiness trainer. Let's embark on a fabulous journey of self-improvement today.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Explore</button>
+          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Download</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% end %>

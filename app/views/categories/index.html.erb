@@ -1,0 +1,11 @@
+<h1 class="display-6 text-center">Journal</h1><br>
+<div class="container d-flex justify-content-evenly flex-row">
+<div id="categories">
+  <% @categories.each do |category| %>
+      <% if category.user == current_user %>
+        <%= render category %>
+        <br>
+      <% end %>
+  <% end %>
+</div>
+</div>

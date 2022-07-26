@@ -1,0 +1,23 @@
+<div id="<%= dom_id task %>">
+
+  <div class="card-header">
+    <% if task.deadline.to_date - DateTime.current.to_date == 0%>
+      <%= task.deadline.strftime('Today, %l:%M %p') %>
+    <% elsif task.deadline.to_date-DateTime.current.to_date == 1%>
+      <%= task.deadline.strftime('Tomorrow, %l:%M %p') %>
+    <% elsif task.deadline.to_date-DateTime.current.to_date < 0 %>
+      <%= task.deadline.strftime('%b %d %Y %l:%M %p') %>
+    <% elsif task.deadline.to_date-DateTime.current.to_date < 7 %>
+      <%= task.deadline.strftime('%A, %l:%M %p') %>
+    <% else %>
+      <%= task.deadline.strftime('%b %d %Y %l:%M %p') %>
+    <% end %>
+  </div>
+   <div class="card-body">
+     <h5 class="card-title"><%= task.name %><br></h5>
+    <p class="card-text"><%= task.body %><br></p>
+    <%= link_to "", task, class:"bi bi-info-circle h4" %>
+
+  </div>
+
+</div>

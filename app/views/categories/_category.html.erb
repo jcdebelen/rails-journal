@@ -1,0 +1,18 @@
+
+<div id="<%= dom_id category %>" class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title lead"><strong><h5><%= link_to category.name, category, class:"text-decoration-none text-dark"%></h5></strong>
+    <p class="card-text"><%= category.description %></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <% category.tasks.each do |task| %>
+      <li class="list-group-item">
+      <%= link_to task.name, task, class:"text-decoration-none text-dark" %>
+      </li>
+    <%end%>
+  </ul>
+  <div class="card-body">
+  <%= link_to "", new_task_path,  class:"bbi bi-plus-circle-fill h3" %>
+    
+  </div>
+</div>
